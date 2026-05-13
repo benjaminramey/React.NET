@@ -13,11 +13,11 @@
     <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.win-x86" Version="3.1.8" />
     <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.win-x64" Version="3.1.8" />
     <PackageReference Include="JavaScriptEngineSwitcher.Extensions.MsDependencyInjection" Version="3.1.0" />
-    <PackageReference Include="React.AspNet" Version="5.2.11" />
-    <PackageReference Include="React.Router" Version="5.2.11" />
+    <PackageReference Include="React.AspNet" Version="5.2.13-dev-20260513-1440" />
+    <PackageReference Include="React.Router" Version="5.2.13-dev-20260513-1440" />
   </ItemGroup>
 
   <Target Name="ReactBuild" AfterTargets="Build">
-    <Exec Command="npm i &amp;&amp; npm run build" />
+    <Exec Command="npm i &amp;&amp; npm run build" EnvironmentVariables="NODE_OPTIONS=--openssl-legacy-provider" />
   </Target>
 </Project>
