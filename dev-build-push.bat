@@ -1,1 +1,1 @@
-call runs-msbuild.bat "/p:BuildType=Dev" "/t:Package;Push"
+dotnet build build.proj /p:BuildType=Dev /t:Package;Push

@@ -1,1 +1,1 @@
-call runs-msbuild.bat "/p:BuildType=Release"
+dotnet build build.proj /p:BuildType=Release
