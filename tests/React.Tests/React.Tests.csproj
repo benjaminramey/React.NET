@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Copyright>Copyright 2014-Present Facebook, Inc</Copyright>
@@ -19,11 +19,7 @@
     <ProjectReference Include="..\..\src\React.Core\React.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
-    <ProjectReference Include="..\..\src\React.Owin\React.Owin.csproj" />
-    <ProjectReference Include="..\..\src\React.Router.Mvc4\React.Router.Mvc4.csproj" />
-    <ProjectReference Include="..\..\src\React.Web.Mvc4\React.Web.Mvc4.csproj" />
-  </ItemGroup>
+
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1' ">
     <ProjectReference Include="..\..\src\React.Router\React.Router.csproj" />
@@ -41,11 +37,7 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Web" />
-  </ItemGroup>
+
 
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />

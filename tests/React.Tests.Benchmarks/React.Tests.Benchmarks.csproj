@@ -19,11 +19,7 @@
     <ProjectReference Include="..\React.Tests.Common\React.Tests.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
-    <Reference Include="System.Web" />
 
-    <ProjectReference Include="..\..\src\React.Web.Mvc4\React.Web.Mvc4.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Update="Sample.jsx">
