@@ -393,7 +393,7 @@ namespace React
 			var engine = _engineFactory.GetEngineForCurrentThread();
 			EnsureBabelLoaded(engine);
 
-#if NET40 || NET45 || NETSTANDARD2_0
+#if NET40 || NET45 || NETSTANDARD2_0 || NETCOREAPP
 			try
 			{
 				return engine.CallFunctionReturningJson<T>(function, args);
