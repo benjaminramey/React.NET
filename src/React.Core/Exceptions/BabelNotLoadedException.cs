@@ -6,7 +6,6 @@
  */
 
 using System;
-using System.Runtime.Serialization;
 
 namespace React.Exceptions
 {
@@ -20,13 +19,6 @@ namespace React.Exceptions
 		/// Initializes a new instance of the <see cref="BabelNotLoadedException"/> class.
 		/// </summary>
 		public BabelNotLoadedException() : base(GetMessage()) { }
-
-		/// <summary>
-		/// Used by deserialization
-		/// </summary>
-		protected BabelNotLoadedException(SerializationInfo info, StreamingContext context)
-			: base(info, context)
-		{ }
 
 		/// <summary>
 		/// Gets a message that describes the current exception.

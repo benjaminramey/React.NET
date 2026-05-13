@@ -6,7 +6,6 @@
  */
 
 using System;
-using System.Runtime.Serialization;
 
 namespace React.Exceptions
 {
@@ -21,11 +20,5 @@ namespace React.Exceptions
 		/// </summary>
 		/// <param name="message">The message that describes the error.</param>
 		public ReactEngineNotFoundException(string message) : base(message) { }
-
-		/// <summary>
-		/// Used by deserialization
-		/// </summary>
-		protected ReactEngineNotFoundException(SerializationInfo info, StreamingContext context)
-			: base(info, context) { }
 	}
 }

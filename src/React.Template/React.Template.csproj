@@ -10,7 +10,7 @@
     <Description>Templates to use for bootstrapping new ReactJS.NET applications.</Description>
     <PackageTags>dotnet-new;templates;react</PackageTags>
 
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
 
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>

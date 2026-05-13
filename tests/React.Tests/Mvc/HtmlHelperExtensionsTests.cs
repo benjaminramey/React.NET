@@ -87,12 +87,8 @@ namespace React.Tests.Mvc
 		public void ScriptNonceIsReturned()
 		{
 			string nonce;
-			using (var random = new RNGCryptoServiceProvider())
-			{
-				byte[] nonceBytes = new byte[16];
-				random.GetBytes(nonceBytes);
-				nonce = Convert.ToBase64String(nonceBytes);
-			}
+			var nonceBytes = System.Security.Cryptography.RandomNumberGenerator.GetBytes(16);
+nonce = Convert.ToBase64String(nonceBytes);
 
 			var component = new Mock<IReactComponent>();
 			component.Setup(x => x.RenderHtml(It.IsAny<TextWriter>(), false, false, null, null))

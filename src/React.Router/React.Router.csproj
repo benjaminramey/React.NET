@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<Description>React Router support for ReactJS.NET.</Description>
 		<Copyright>Copyright 2014-Present Facebook, Inc</Copyright>
 		<AssemblyTitle>ReactJS.NET Router</AssemblyTitle>
 		<Authors>Daniel Lo Nigro, Gunnar Már Óttarsson</Authors>
-		<TargetFrameworks>netstandard2.0;netcoreapp3.0</TargetFrameworks>
+		<TargetFramework>net10.0</TargetFramework>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<AssemblyName>React.Router</AssemblyName>
 		<AssemblyOriginatorKeyFile>../key.snk</AssemblyOriginatorKeyFile>
@@ -34,13 +34,8 @@
 		<PackageReference Include="Microsoft.Sourcelink.Github" Version="1.0.0" PrivateAssets="All" />
 	</ItemGroup>
 
-	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
-	</ItemGroup>
-
-	<ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' ">
-		<FrameworkReference Include="Microsoft.AspNetCore.App" Version="3.0.0" />
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 
 	<ItemGroup>

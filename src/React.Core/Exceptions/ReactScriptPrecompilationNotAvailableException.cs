@@ -6,7 +6,6 @@
  */
 
 using System;
-using System.Runtime.Serialization;
 
 namespace React.Exceptions
 {
@@ -21,11 +20,5 @@ namespace React.Exceptions
 		/// </summary>
 		/// <param name="message">The message that describes the error.</param>
 		public ReactScriptPrecompilationNotAvailableException(string message) : base(message) { }
-
-		/// <summary>
-		/// Used by deserialization
-		/// </summary>
-		protected ReactScriptPrecompilationNotAvailableException(SerializationInfo info, StreamingContext context)
-			: base(info, context) { }
 	}
 }
