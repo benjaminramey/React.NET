@@ -35,7 +35,7 @@ of patent rights can be found in the PATENTS file in the same directory.
 		<PackageAssemblies Include="System.Web.Optimization.React" />
 	</ItemGroup>
 
-	<Import Project="$(MSBuildProjectDirectory)\tools\MSBuildTasks\MSBuild.Community.Tasks.Targets" />
+
 
 	<Target Name="RestorePackages" DependsOnTargets="Clean;UpdateVersion">
 		<!-- NuGet packages for "legacy" projects (eg. React.Samples.Mvc4) -->
@@ -57,19 +57,15 @@ of patent rights can be found in the PATENTS file in the same directory.
 			WorkingDirectory="src/React.Core/Resources/babel-legacy"
 			Command="npm install"
 		/>
-		<Exec
-			WorkingDirectory="src/React.Sample.Mvc4"
-			Command="npm install"
-		/>
 	</Target>
 
 	<Target Name="UpdateVersion">
-		<GitVersion LocalPath="$(MSBuildProjectDirectory)">
-			<Output TaskParameter="CommitHash" PropertyName="Revision" />
-		</GitVersion>
-		<Time Format="yyyyMMdd-HHmm">
-			<Output TaskParameter="FormattedTime" PropertyName="Date" />
-		</Time>
+		<Exec Command="git rev-parse --short HEAD" ConsoleToMSBuild="true">
+			<Output TaskParameter="ConsoleOutput" PropertyName="Revision" />
+		</Exec>
+		<PropertyGroup>
+			<Date>$([System.DateTime]::Now.ToString('yyyyMMdd-HHmm'))</Date>
+		</PropertyGroup>
 		<!-- Prepend date to build version if a dev build-->
 		<PropertyGroup Condition="$(BuildType) == 'Release'">
 			<VersionString>$(Major).$(Minor).$(Build)</VersionString>
@@ -78,12 +74,10 @@ of patent rights can be found in the PATENTS file in the same directory.
 			<VersionString>$(Major).$(Minor).$(Build)-dev-$(Date)</VersionString>
 		</PropertyGroup>
 		<!-- Set version for assemblies -->
-		<AssemblyInfo
-			CodeLanguage="CS"
-			OutputFile="src\SharedAssemblyVersionInfo.cs"
-			AssemblyVersion="$(Major).$(Minor)"
-			AssemblyFileVersion="$(VersionString).$(Revision)"
-			AssemblyInformationalVersion="$(VersionString)"
+		<WriteLinesToFile
+			File="src\SharedAssemblyVersionInfo.cs"
+			Lines="[assembly: System.Reflection.AssemblyVersion(&quot;$(Major).$(Minor)&quot;)];[assembly: System.Reflection.AssemblyFileVersion(&quot;$(VersionString).$(Revision)&quot;)];[assembly: System.Reflection.AssemblyInformationalVersion(&quot;$(VersionString)&quot;)]"
+			Overwrite="true"
 		/>
 	</Target>
 
@@ -92,13 +86,13 @@ of patent rights can be found in the PATENTS file in the same directory.
 			ASP.NET Core projects don't delete generated .nupkg files when cleaned or rebuilt, so we need to
 			do it here. See https://github.com/aspnet/XRE/issues/1301
 		-->
-		<DeleteTree Directories="src/artifacts" />
-		<DeleteTree Directories="src/%(PackageAssemblies.Identity)/bin" />
+		<RemoveDir Directories="src/artifacts" />
+		<RemoveDir Directories="src/%(PackageAssemblies.Identity)/bin" />
 	</Target>
 
 	<Target Name="Build" DependsOnTargets="RestorePackages;UpdateVersion">
-		<Exec WorkingDirectory="src/React.Core" Command="node_modules/.bin/webpack" />
-		<Exec WorkingDirectory="src/React.Core/Resources/babel-legacy" Command="node_modules/.bin/webpack" />
+		<Exec WorkingDirectory="src/React.Core" Command="node_modules/.bin/webpack" EnvironmentVariables="NODE_OPTIONS=--openssl-legacy-provider" />
+		<Exec WorkingDirectory="src/React.Core/Resources/babel-legacy" Command="node_modules/.bin/webpack" EnvironmentVariables="NODE_OPTIONS=--openssl-legacy-provider" />
 		<MSBuild Projects="$(SolutionFile)" Targets="Rebuild" Properties="Configuration=Release;Platform=Any CPU;NoWarn=1607,7035,1701;Version=$(VersionString)" />
 	</Target>
 
